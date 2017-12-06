@@ -10,6 +10,8 @@ for small restaurant owners.
 Currently WIP
 
 TODO:
+- [ ] Add Linux and Mac support
+- [ ] Check chrome and chromedriver version and update it during runtime without crashing
 - [ ] Get user data about login and employee name information from a separate file
 - [ ] Add an email option using SMTP to send final data of employees
 - [ ] Allow users to confirm the email that's being generate before it's sent
