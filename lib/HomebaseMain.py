@@ -18,6 +18,7 @@ from selenium.webdriver.support.select import Select
 user32 = ctypes.windll.user32
 
 # don't think this is sensitive data as you have to be logged in to access it
+# TODO: dynamically get ids without the user putting it in the same way we get hour information
 connie_id = '1494784'
 joel_id = '631266'
 ignacio_id = '348950'
@@ -28,7 +29,7 @@ def quit_on_error():
     quit(1)
 
 
-def get_employee_data(employee_id, employee_name, start_day, end_day, month, year):
+def get_employee_data(driver, employee_id, employee_name, start_day, end_day, month, year):
     URL = 'https://app.joinhomebase.com/timesheets#summary/{0}/{3}-{1}-{4}/{3}-{2}-{4}'.format(
         employee_id, start_day, end_day, month, year)
     driver.get(URL)  # redirects properly
@@ -56,11 +57,11 @@ def get_employee_data(employee_id, employee_name, start_day, end_day, month, yea
             return final_hours
 
 
-def wait_for_id(element):
+def wait_for_id(driver, element):
     return WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, element)))
 
 
-def wait_for_name(element):
+def wait_for_name(driver, element):
     return WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.NAME, element)))
 
 
@@ -84,6 +85,8 @@ class Information:
         self.email_area = None
         self.password_area = None
 
+        self.driver_path = ('../{}'.format(self.path))
+
     @property
     def get_date(self) -> 'datetime.now()':
         """
@@ -97,74 +100,81 @@ class Information:
     def get_window_dimensions(self):
         return user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
 
+class Parser:
+    def __init__ (self, dictionary):
+        # store name information here
+        pass
+
+class Employees:
+    def __init__(self, *args, **kwargs):
+        self.employees = args
 
 # get these values to be user inputs, we ideally just want a value interval of
 # 1-15 and 15-30 since employees get paid bimonthly
+def fetchInfo():
+
+    interval1 = 1
+    interval2 = 15
+
+    # creating instance of Information
+    info = Information(interval1, interval2)
+
+    # debugging and date-related problems with the program
+    print("Today's date is {}/{}/{}.".format(info.month, info.day, info.year))
+
+    # webdriver stuff is complicated with non-windows machines
+    # it this program ends up working for windows we're going to add
+    # linux and macOS support which shouldn't be too complicated
+    if 'win' not in info.os:
+        print('Your operating system ({}) is not supported.'.format(info.os))
+
+    driver = webdriver.Chrome('../chromedriver')
+
+    driver.maximize_window()
+
+    driver.get('https://app.joinhomebase.com/accounts/sign_in')
+
+    # ---------------logging in--------------
+    try:
+        info.email_area = wait_for_id(driver, "account_login")
+        info.password_area = wait_for_id(driver, "account_password")
+    except selenium.common.exceptions.WebDriverException:
+        # the program has a problem accessing Homebase, probably because of internet problems
+        # we probably don't have to handle this error again later since a connection problem
+        # would exit the program the first time
+        print('The program timed out before it could find the login')
+        quit_on_error()
+
+    info.email_area.send_keys(CONSTANTS.login_email)
+    info.password_area.send_keys(CONSTANTS.login_password)
+
+    info.password_area.send_keys(Keys.RETURN)  # pressing enter, obviously
 
 
-interval1 = 1
-interval2 = 15
-
-# creating instance of Information
-info = Information(interval1, interval2)
-
-# debugging and date-related problems with the program
-print("Today's date is {}/{}/{}.".format(info.month, info.day, info.year))
-
-# webdriver stuff is complicated with non-windows machines
-# it this program ends up working for windows we're going to add
-# linux and macOS support which shouldn't be too complicated
-if 'win' not in info.os:
-    print('Your operating system ({}) is not supported.'.format(info.os))
+    # ---- logged in after this point-----
+    reports_area = wait_for_id(driver, 'dashboard')
+    # this way we know that the page is loaded and we're logged in
+    # dashboard is an arbitrary element on the page that loads later than the other elements
 
 
-driver = webdriver.Chrome('{}/chromedriver'.format(info.path))
+    print('Logged in.')
+
+    # make these requests be in a loop based on the amount of employee data that we want to grab
+    # so far it's just a placeholder
+
+    joel_hours = get_employee_data(driver, joel_id, "Joel", info.start_day, info.end_day, info.month, info.year)
+    connie_hours = get_employee_data(driver, connie_id, "Connie", info.start_day, info.end_day, info.month, info.year)
+
+    print("Joel worked for " + joel_hours + " hours between {} and {}th.".format(interval1, interval2))
+    print("Connie worked for " + connie_hours + " hours between the {} and {}th.".format(interval1, interval2))
+
+    #  ---- setting up value to return -----
+    stats = {}
 
 
-driver.maximize_window()
+    driver.close()
 
-driver.get('https://app.joinhomebase.com/accounts/sign_in')
-
-# ---------------logging in--------------
-try:
-    info.email_area = wait_for_id("account_login")
-    info.password_area = wait_for_id("account_password")
-except selenium.common.exceptions.WebDriverException:
-    # the program has a problem accessing Homebase, probably because of internet problems
-    # we probably don't have to handle this error again later since a connection problem
-    # would exit the program the first time
-    print('The program timed out before it could find the login')
-    quit_on_error()
-
-
-info.email_area.send_keys(CONSTANTS.login_email)
-info.password_area.send_keys(CONSTANTS.login_password)
-
-info.password_area.send_keys(Keys.RETURN)  # pressing enter, obviously
-
-
-# ---- logged in after this point-----
-
-reports_area = wait_for_id('dashboard')
-# this way we know that the page is loaded and we're logged in
-# dashboard is an arbitrary element on the page that loads later than the other elements
-
-
-print('Logged in.')
-
-# make these requests be in a loop based on the amount of employee data that we want to grab
-# so far it's just a placeholder
-joel_hours = get_employee_data(joel_id, "Joel", info.start_day, info.end_day, info.month, info.year)
-connie_hours = get_employee_data(connie_id, "Connie", info.start_day, info.end_day, info.month, info.year)
-
-print("Joel worked for " + joel_hours + " hours between {} and {}th.".format(interval1, interval2))
-print("Connie worked for " + connie_hours + " hours between the {} and {}th.".format(interval1, interval2))
-
-
-driver.close()
-
-# in case we don't convert to a GUI system we want the
-# information to be visible before the terminal closes
-input('')
+    # in case we don't convert to a GUI system we want the
+    # information to be visible before the terminal closes
 
 
