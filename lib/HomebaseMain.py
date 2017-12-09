@@ -100,14 +100,17 @@ class Information:
     def get_window_dimensions(self):
         return user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
 
+
 class Parser:
     def __init__ (self, dictionary):
         # store name information here
         pass
 
+
 class Employees:
     def __init__(self, *args, **kwargs):
         self.employees = args
+
 
 # get these values to be user inputs, we ideally just want a value interval of
 # 1-15 and 15-30 since employees get paid bimonthly
@@ -150,12 +153,10 @@ def fetchInfo():
 
     info.password_area.send_keys(Keys.RETURN)  # pressing enter, obviously
 
-
     # ---- logged in after this point-----
     reports_area = wait_for_id(driver, 'dashboard')
     # this way we know that the page is loaded and we're logged in
     # dashboard is an arbitrary element on the page that loads later than the other elements
-
 
     print('Logged in.')
 
@@ -170,7 +171,6 @@ def fetchInfo():
 
     #  ---- setting up value to return -----
     stats = {}
-
 
     driver.close()
 
