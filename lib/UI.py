@@ -1,16 +1,8 @@
 import math
 import sys
-from os.path import dirname, abspath
-import os
-PACKAGE_PARENT = '..'
-SCRIPT_DIR = os.path.dirname(os.path.realpath(os.path.join(os.getcwd(), os.path.expanduser(__file__))))
-sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
-
-
 from PyQt5 import QtWidgets
-
 import Template as template
-from .lib import HomebaseMain as lib
+import HomebaseMain as lib
 
 
 class OliveTree(QtWidgets.QTabWidget):

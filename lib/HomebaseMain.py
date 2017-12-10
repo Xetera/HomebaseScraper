@@ -1,24 +1,21 @@
+import ctypes
 import os
 import sys
 from datetime import datetime
-import ctypes
-import time
-
-from HomebaseScraper.sub import CONSTANTS
-
 
 import selenium.common.exceptions
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.select import Select
 
+import CONSTANTS
 user32 = ctypes.windll.user32
 
 # don't think this is sensitive data as you have to be logged in to access it
 # TODO: dynamically get ids without the user putting it in the same way we get hour information
+
 connie_id = '1494784'
 joel_id = '631266'
 ignacio_id = '348950'
