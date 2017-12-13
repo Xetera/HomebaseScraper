@@ -1,0 +1,1 @@
+C:\Users\Ali\AppData\Local\Programs\Python\Python35-32\Lib\site-packages\PyQt5\pyuic5.bat pyqt.ui -o Template.py
