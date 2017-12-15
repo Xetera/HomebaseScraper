@@ -114,7 +114,7 @@ class Employees:
 def fetchInfo():
 
     interval1 = 1
-    interval2 = 15
+    interval2 = 14
 
     # creating instance of Information
     info = Information(interval1, interval2)
@@ -174,4 +174,5 @@ def fetchInfo():
     # in case we don't convert to a GUI system we want the
     # information to be visible before the terminal closes
 
+fetchInfo()
 

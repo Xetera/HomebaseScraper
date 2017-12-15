@@ -116,7 +116,7 @@ class Ui_MainWindow(object):
         self.chrome_freeze_frame.setToolTip("")
         self.chrome_freeze_frame.setAutoFillBackground(False)
         self.chrome_freeze_frame.setStyleSheet("background: rgb(219, 240, 27);\n"
-"")
+                                    "")
         self.chrome_freeze_frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.chrome_freeze_frame.setScaledContents(False)
         self.chrome_freeze_frame.setAlignment(QtCore.Qt.AlignCenter)

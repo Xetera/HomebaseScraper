@@ -50,6 +50,7 @@ class OliveTree(QtWidgets.QTabWidget):
         self.ui.tips_output.setText(string)
 
     def setup_style(self):
+        # hide the loading screen for
         self.ui.chrome_freeze_frame.hide()
 
     def setup_events(self):
