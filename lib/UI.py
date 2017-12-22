@@ -55,7 +55,8 @@ class OliveTree(QtWidgets.QTabWidget):
 
     def setup_events(self):
 
-        self.ui.Tab1.autoFillBackground()
+        # self.ui.Tab1.autoFillBackground()
+        
         # anonymous functions required to prevent defined functions from running as soon as the program starts
         # sort of like a reverse closure
         self.ui.getHours.clicked.connect(lambda: self.get_employee_hours())

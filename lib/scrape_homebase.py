@@ -111,10 +111,10 @@ class Employees:
 
 # get these values to be user inputs, we ideally just want a value interval of
 # 1-15 and 15-30 since employees get paid bimonthly
-def fetchInfo():
+def fetchInfo(interval1, interval2):
 
-    interval1 = 1
-    interval2 = 14
+    interval1 = 15
+    interval2 = 21
 
     # creating instance of Information
     info = Information(interval1, interval2)
@@ -174,5 +174,4 @@ def fetchInfo():
     # in case we don't convert to a GUI system we want the
     # information to be visible before the terminal closes
 
-fetchInfo()
 
