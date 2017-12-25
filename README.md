@@ -7,11 +7,12 @@ Homebase API but it requires an additional monthly payment to Homebase which can
 for small restaurant owners.
 
 
-## Currently WIP
+Currently WIP
 
 # Modules Used:
 * PyQt for GUI
 * SMTP for optional email service
+
 
 # TODO:
 - [ ] Add Linux and Mac support
@@ -20,6 +21,7 @@ for small restaurant owners.
 - [x] Add an email option using SMTP to send final data of employees
 - [ ] Allow users to confirm the email that's being generate before it's sent
 - [ ] Add a separate page or way to enter information about tips
+
 
 
 # TODO Optional:
