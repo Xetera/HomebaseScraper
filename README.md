@@ -2,9 +2,13 @@
 
 The end goal of this program is being able to collect information about work hours of employees
 from Homebase (possibly including things like tip information too which would have to be entered manually)
-and email them to an accountant for tax purposes. This is normally easy to do by utilizing the
+and optionally email them to an accountant for tax purposes. 
+This is normally easy to do by utilizing the
 Homebase API but it requires an additional monthly payment to Homebase which can be a large expense
 for small restaurant owners.
+
+Only a small portion of the program is dedicated to scraping info from Homebase whereas the rest
+is more of a personalized application for restaurant management.
 
 
 
