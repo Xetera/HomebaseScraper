@@ -7,9 +7,13 @@ Homebase API but it requires an additional monthly payment to Homebase which can
 for small restaurant owners.
 
 
-Currently WIP
+## Currently WIP
 
-TODO:
+# Modules Used:
+* PyQt for GUI
+* SMTP for optional email service
+
+# TODO:
 - [ ] Add Linux and Mac support
 - [ ] Check chrome and chromedriver version and update it during runtime without crashing
 - [ ] Get user data about login and employee name information from a separate file
@@ -18,5 +22,5 @@ TODO:
 - [ ] Add a separate page or way to enter information about tips
 
 
-TODO Optional:
-- [ ] Add a gui element to make use easier
+# TODO Optional:
+- [x] Add a gui element to make use easier
