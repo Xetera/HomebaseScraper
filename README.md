@@ -1,4 +1,4 @@
-# HomebaseScraper
+# HomebaseScraper --- WIP
 
 The end goal of this program is being able to collect information about work hours of employees
 from Homebase (possibly including things like tip information too which would have to be entered manually)
@@ -7,7 +7,7 @@ Homebase API but it requires an additional monthly payment to Homebase which can
 for small restaurant owners.
 
 
-Currently WIP
+
 
 # Modules Used:
 * PyQt for GUI
